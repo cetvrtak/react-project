@@ -11,8 +11,8 @@ function App() {
   const [rowData, setRowData] = useState();
 
     const [columnDefs, setColumnDefs] = useState([
-        {field: 'symbol', filter: true},
-        {field: 'priceChange', filter: true},
+        {field: 'symbol', sortable: true},
+        {field: 'priceChange'},
         {field: 'priceChangePercent'},
         {field: 'weightedAvgPrice'},
         {field: 'prevClosePrice'},
