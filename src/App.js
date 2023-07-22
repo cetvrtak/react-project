@@ -39,8 +39,14 @@ function App() {
         setLoading(true);
         fetch('https://data.binance.com/api/v3/ticker/24hr')
             .then(result => result.json())
-            .then(rowData => {
-                setRowData(rowData);
+            .then(data => {
+                // Convert the timestamps to formatted dates before setting the rowData
+                const formattedData = data.map(item => ({
+                    ...item,
+                    openTime: formatDate(item.openTime),
+                    closeTime: formatDate(item.closeTime),
+                }));
+                setRowData(formattedData);
                 setLoading(false);
             })
             .catch(error => {
@@ -48,6 +54,12 @@ function App() {
                 setLoading(false);
             });
     }, []);
+
+    // Function to format the timestamp to DD/MM/YYYY
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    };
 
     return (
         <div className="App">
