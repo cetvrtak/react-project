@@ -61,6 +61,8 @@ function App() {
                     <AgGridReact
                         rowData={rowData}
                         columnDefs={columnDefs}
+                        paginationAutoPageSize={true}
+                        pagination={true}
                     />
                 ) : (
                     <div>No data available.</div>
