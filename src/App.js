@@ -9,6 +9,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 function App() {
     const [rowData, setRowData] = useState();
+    const [loading, setLoading] = useState(true);
 
     const [columnDefs, setColumnDefs] = useState([
         {field: 'symbol', sortable: true},
@@ -35,19 +36,35 @@ function App() {
     ]);
 
     useEffect(() => {
+        setLoading(true);
         fetch('https://data.binance.com/api/v3/ticker/24hr')
             .then(result => result.json())
-            .then(rowData => setRowData(rowData))
+            .then(rowData => {
+                setRowData(rowData);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                setLoading(false);
+            });
     }, []);
 
     return (
         <div className="App">
             <div className="ag-theme-alpine" style={{height: 500}}>
-
-                <AgGridReact
-                    rowData={rowData} // Row Data for Rows
-                    columnDefs={columnDefs} // Column Defs for Columns
-                />
+                {loading ? (
+                    <div className="loading-animation">
+                        <div className="loader"></div>
+                        Loading data...
+                    </div>
+                ) : rowData.length > 0 ? ( // Check if rowData is not empty
+                    <AgGridReact
+                        rowData={rowData}
+                        columnDefs={columnDefs}
+                    />
+                ) : (
+                    <div>No data available.</div>
+                )}
             </div>
         </div>
     );
