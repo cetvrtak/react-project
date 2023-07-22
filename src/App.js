@@ -12,7 +12,7 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     const [columnDefs, setColumnDefs] = useState([
-        {field: 'symbol', sortable: true},
+        {field: 'symbol', sortable: true, unSortIcon: true},
         {field: 'priceChange'},
         {field: 'priceChangePercent'},
         {field: 'weightedAvgPrice'},
