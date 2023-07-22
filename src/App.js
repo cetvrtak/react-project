@@ -1,14 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { useState, useEffect } from "react";
-import { AgGridReact } from 'ag-grid-react';
+import {useState, useEffect} from "react";
+import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 
 function App() {
-  const [rowData, setRowData] = useState();
+    const [rowData, setRowData] = useState();
 
     const [columnDefs, setColumnDefs] = useState([
         {field: 'symbol', sortable: true},
@@ -34,23 +34,23 @@ function App() {
         {field: 'count'},
     ]);
 
-  useEffect(() => {
-    fetch('https://data.binance.com/api/v3/ticker/24hr')
-        .then(result => result.json())
-        .then(rowData => setRowData(rowData))
-  }, []);
+    useEffect(() => {
+        fetch('https://data.binance.com/api/v3/ticker/24hr')
+            .then(result => result.json())
+            .then(rowData => setRowData(rowData))
+    }, []);
 
-  return (
-    <div className="App">
-      <div className="ag-theme-alpine" style={{height: 500}}>
+    return (
+        <div className="App">
+            <div className="ag-theme-alpine" style={{height: 500}}>
 
-        <AgGridReact
-            rowData={rowData} // Row Data for Rows
-            columnDefs={columnDefs} // Column Defs for Columns
-        />
-      </div>
-    </div>
-  );
+                <AgGridReact
+                    rowData={rowData} // Row Data for Rows
+                    columnDefs={columnDefs} // Column Defs for Columns
+                />
+            </div>
+        </div>
+    );
 }
 
 export default App;
