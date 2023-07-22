@@ -63,6 +63,7 @@ function App() {
 
     return (
         <div className="App">
+            <h1 className="ag-main-title">Price Change Table</h1>
             <div className="ag-theme-alpine" style={{height: 500}}>
                 {loading ? (
                     <div className="loading-animation">
